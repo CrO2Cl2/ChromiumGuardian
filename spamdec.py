@@ -28,7 +28,7 @@ clf = MultinomialNB()
 clf.fit(X_train, y_train)
 
 # Define the message to classify
-messages = ["ewr"]                     # INPUT THE MESSAGE TO CLASSIFY HERE
+messages = ["ewr"]                     # INPUT THE MESSAGES TO CLASSIFY HERE
 
 for message in messages:
     # Transform the message into a numerical representation
