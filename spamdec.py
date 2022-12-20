@@ -3,7 +3,7 @@ from sklearn.feature_extraction.text import CountVectorizer
 from sklearn.naive_bayes import MultinomialNB
 
 # Read in the data
-df = pd.read_csv('spam_data.csv')
+df = pd.read_csv('spam_data.csv', error_bad_lines=False)
 
 # Create a CountVectorizer object
 vectorizer = CountVectorizer()
@@ -25,9 +25,17 @@ clf = MultinomialNB()
 clf.fit(X_train, y_train)
 
 # Define the message to classify
-message = "input the message to classify here"               # INPUT THE MESSAGE TO CLASSIFY HERE
+message = "guhvdshjgkdsf"                                                       # INPUT THE MESSAGE TO CLASSIFY HERE
 
 # Transform the message into a numerical representation
+X_message = vectorizer.transform([message])
+    
+# Make a prediction on the message
+prediction = clf.predict(X_message)[0]
+
+# Print the prediction
+print(f"Prediction: {prediction}")
+
 X_message = vectorizer.transform([message])
     
 # Make a prediction on the message
