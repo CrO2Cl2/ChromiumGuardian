@@ -2,7 +2,7 @@
  simple spam detection algorythm made for the usage with discord bots. The Database was trained from actual discord messages.
  All the discord messages have been anonymized and no perosnal information is contained. All the messages have been collected with the consent of the original author.
 
- Usage: this is how you would do it, if it were remotely usable. 
+ Usage: 
  put the message that you want to classify as spam or not where the # INPUT THE MESSAGE TO CLASSIFY HERE comment is located. the script will then output wheter the inputted message is spam or not. 
 
  DISCLAMER:
