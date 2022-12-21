@@ -1,34 +1,15 @@
+# Classify messages using the trained model
 import pandas as pd
 from sklearn.feature_extraction.text import CountVectorizer
 from sklearn.naive_bayes import MultinomialNB
-import pandas as pd
-from sklearn.feature_extraction.text import CountVectorizer
-from sklearn.naive_bayes import MultinomialNB
-
-# Read in the data
-df = pd.read_csv('spam_data.csv', error_bad_lines=False, encoding='windows-1252')
-
-# Create a CountVectorizer object
-vectorizer = CountVectorizer()
-
-# Transform the texts into a numerical representation
-X = vectorizer.fit_transform(df['text'])
-
-# Extract the labels
-y = df['label'].values
-
-# Split the data into train and test sets
-from sklearn.model_selection import train_test_split
-X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
-
-# Create a MultinomialNB object
-clf = MultinomialNB()
-
-# Fit the model to the training data
-clf.fit(X_train, y_train)
+import pickle
 
 # Define the message to classify
-messages = ["ewr"]                     # INPUT THE MESSAGES TO CLASSIFY HERE
+messages = ["uighigh"]                     # INPUT THE MESSAGES TO CLASSIFY HERE
+
+# Load the trained model and the fitted CountVectorizer object from the file
+with open('model.pkl', 'rb') as f:
+    clf, vectorizer = pickle.load(f)
 
 for message in messages:
     # Transform the message into a numerical representation
