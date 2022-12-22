@@ -3,7 +3,7 @@
 import pandas as pd
 
 # Read in the data
-df = pd.read_csv('spam_data.csv', encoding='windows-1252')
+df = pd.read_csv('spam_data.csv', encoding='utf-8')
 
 # Count the number of rows with the 'spam' label
 spam_count = df[df['label'] == 'spam'].shape[0]

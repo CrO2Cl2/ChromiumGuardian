@@ -7,7 +7,7 @@ import matplotlib.pyplot as plt
 from sklearn.preprocessing import LabelEncoder
 
 # Read in the data
-df = pd.read_csv('spam_data.csv', error_bad_lines=False, encoding='windows-1252')
+df = pd.read_csv('spam_data.csv', error_bad_lines=False, encoding='utf-8')
 
 # Create a CountVectorizer object
 vectorizer = CountVectorizer()

@@ -5,21 +5,18 @@ from sklearn.naive_bayes import MultinomialNB
 import pickle
 
 # Define the message to classify
-messages = ["fdgggggggggggggggggg"]                     # INPUT THE MESSAGES TO CLASSIFY HERE
+message = input("message:")                   # INPUT THE MESSAGES TO CLASSIFY HERE. the input is only for testing purposes
 
 # Load the trained model and the fitted CountVectorizer object from the file
 with open('model.pkl', 'rb') as f:
     clf, vectorizer = pickle.load(f)
 
-for message in messages:
-    # Transform the message into a numerical representation
-    X_message = vectorizer.transform([message])
+
+# Transform the message into a numerical representation
+X_message = vectorizer.transform([message])
+
+# Make a prediction on the message
+prediction = clf.predict(X_message)[0]
     
-    # Print the shape of the X_message array
-    #print(f"X_message shape: {X_message.shape}")
-        
-    # Make a prediction on the message
-    prediction = clf.predict(X_message)[0]
-    
-    # Print the prediction
-    print(f"Prediction: {prediction}")
+# Print the prediction
+print(f"Prediction: {prediction}")
