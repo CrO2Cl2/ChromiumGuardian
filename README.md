@@ -1,9 +1,9 @@
 # ChromiumGuardain
- simple spam detection algorythm made for the usage with discord bots. The Database was trained from actual discord messages.
+ spam detection algorythm made for the usage with discord bots. The Database was trained from actual discord messages. The algorythm can aslo detect urls discord invite links, gifs from tenor and
  All the discord messages have been anonymized and no perosnal information is contained. All the messages have been collected with the consent of the original author.
 
  Usage: 
- put the message that you want to classify as spam or not where the # INPUT THE MESSAGE TO CLASSIFY HERE comment is located. the script will then output wheter the inputted message is spam or not. 
+  put the spamdec.py file in the same directory as your discord bot. then import the file into your project, when inputting spamdec.classify_message(message), it will return  "spam", "not spam", "discord_invite", "tenor_gif" or "url" you then will be able to use an if clause to make the actions that you want on different messages
 
  DISCLAMER:
  this is still a crude prototype. It doesn't output a lot of false positives, but it does output a lot of false negatives
