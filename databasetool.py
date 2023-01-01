@@ -1,3 +1,7 @@
+#DATABASETOOL.PY
+# script used to manually input data into the database
+# This script is not needed for actual use
+
 import csv
 import os
 

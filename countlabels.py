@@ -1,5 +1,5 @@
 # This is a script to count the number of rows that contain each laber, to keep the dataset balanced, and keep track of the size of the dataset
-
+# this script is not needed for actual use of ChromiumGuardian
 import pandas as pd
 
 # Read in the data

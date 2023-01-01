@@ -1,3 +1,6 @@
+#TRAIN.PY
+# This script is needed to train the model. 
+# This script is not needed for actual use
 import pandas as pd
 from sklearn.feature_extraction.text import CountVectorizer
 from sklearn.naive_bayes import MultinomialNB

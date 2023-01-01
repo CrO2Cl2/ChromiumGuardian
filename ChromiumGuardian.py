@@ -1,3 +1,5 @@
+#the actual prediction making script
+
 import pickle
 import time
 
@@ -23,17 +25,3 @@ def classify_message(message):
     prediction = clf.predict(X_message)[0]
 
     return prediction
-
-# Define the message to classify
-message = input("message:") # INPUT THE MESSAGES TO CLASSIFY HERE. the input is only for testing purposes
-
-start_time = time.perf_counter()
-
-# Classify the message
-prediction = classify_message(message)
-
-end_time = time.perf_counter()
-
-# Print the prediction and time needed for the operation
-print(f"Prediction: {prediction}")
-print(f"Time needed for the operation: {end_time - start_time:.4f} seconds")
