@@ -17,6 +17,8 @@ def classify_message(message):
     return "https_url"
   elif message.startswith("http://"):
     return "http_url"
+  elif message.startswith("/"):
+    return "slash_command"
   else:
     # Transform the message into a numerical representation
     X_message = vectorizer.transform([message])

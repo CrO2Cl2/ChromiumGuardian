@@ -1,5 +1,5 @@
 # ChromiumGuardain
- spam detection algorythm made for the usage with discord bots. The Database was trained from actual discord messages. The algorythm can aslo detect urls discord invite links, gifs from tenor and
+ spam detection algorythm made for the usage with discord bots. The Database was trained from actual discord messages. The algorythm can aslo detect https and http urls,  discord invite links, and gifs fron tenor
  All the discord messages have been anonymized and no perosnal information is contained. All the messages have been collected with the consent of the original author.
 
  Usage: 

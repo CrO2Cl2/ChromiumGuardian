@@ -1,6 +1,5 @@
-#TRAIN.PY
-# This script is needed to train the model. 
-# This script is not needed for actual use
+import threading
+import time
 import pandas as pd
 from sklearn.feature_extraction.text import CountVectorizer
 from sklearn.naive_bayes import MultinomialNB
@@ -8,7 +7,6 @@ import pickle
 from sklearn import metrics
 import matplotlib.pyplot as plt
 from sklearn.preprocessing import LabelEncoder
-import time
 
 # Read in the data
 df = pd.read_csv('spam_data.csv', error_bad_lines=False, encoding='utf-8')
@@ -29,20 +27,31 @@ X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_
 # Create a MultinomialNB object
 clf = MultinomialNB()
 
-#start Timer 
+# Create a thread for each iteration of the loop
+threads = []
+for i in range(1, X_train.shape[0]):
+    t = threading.Thread(target=clf.partial_fit, args=(X_train[:i], y_train[:i], ['spam', 'not spam']))
+    threads.append(t)
+
+# Start timer
 start_time = time.time()
 
-# Fit the model to the training data
+# Start all threads
 print("Training model...")
-for i in range(1, X_train.shape[0]):
-    clf.partial_fit(X_train[:i], y_train[:i], classes=['spam', 'not spam'])
-    #print(f"Training progress: {i/X_train.shape[0]*100:.2f}%")                   # Only uncomment when a progress bar is really needed, as it makes the performance a lot worse
-    
-#end the Timer 
+for t in threads:
+    t.start()
+
+# Wait for all threads to complete
+for t in threads:
+    t.join()
+
+# End timer
 end_time = time.time()
 
-#calculate the elapsed time 
+# Calculate elapsed time
 elapsed_time = end_time - start_time
+
+print("Training complete.")
 
 # Save the model and the fitted CountVectorizer object to a file
 with open('model.pkl', 'wb') as f:
@@ -51,11 +60,15 @@ with open('model.pkl', 'wb') as f:
 # Evaluate the model on the test set
 y_pred = clf.predict(X_test)
 
-# Print the evaluation metrics  the other metrics still don't work
+# Print the evaluation metrics
 print("Accuracy:", metrics.accuracy_score(y_test, y_pred))
 #print("Precision:", metrics.precision_score(y_test, y_pred))
 #print("Recall:", metrics.recall_score(y_test, y_pred))
 #print("F1 score:", metrics.f1_score(y_test, y_pred))
+
+#show the elapsed time in seconds
+print("elapsed time:")
+print(elapsed_time)
 
 # Compute the confusion matrix
 confusion_matrix = metrics.confusion_matrix(y_test, y_pred)
@@ -91,3 +104,4 @@ plt.ylabel('True Positive Rate')
 plt.title('Receiver Operating Characteristic')
 plt.legend(loc="lower right")
 plt.show()
+
