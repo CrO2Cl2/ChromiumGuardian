@@ -1,4 +1,4 @@
-text,label,
+word,is_spam
 or do that if ya want,not spam,
 u coded it for a reason,not spam,
 u made that too,not spam,
@@ -1894,7 +1894,7 @@ and that's smth you can sometimes just not understand...,not spam,
 yeah,not spam,
 exactly,not spam,
 I believe they explain it here,not spam,
-Not sure tho," and I can't check rn""",not spam
+"Not sure tho, and I can't check rn",not spam
 Just if you're curious,not spam,
 """what's going on??""",not spam,
 """my gender's going on"" or what",not spam,

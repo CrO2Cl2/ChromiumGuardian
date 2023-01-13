@@ -3,9 +3,10 @@
 import pickle
 import time
 
-# Load the trained model and the fitted CountVectorizer object from the file
-with open('model.pkl', 'rb') as f:
-  clf, vectorizer = pickle.load(f)
+
+# Load the trained model
+clf = pickle.load(open('keysmash_model.pkl','rb'))
+
 
 def classify_message(message):
   # Check if the message is a Discord invite URL, Tenor link, or HTTPS link using string functions
@@ -20,10 +21,9 @@ def classify_message(message):
   elif message.startswith("/"):
     return "slash_command"
   else:
-    # Transform the message into a numerical representation
-    X_message = vectorizer.transform([message])
-
-    # Make a prediction on the message
-    prediction = clf.predict(X_message)[0]
-
-    return prediction
+    # Use the model to classify new inputs
+    prediction = clf.predict([message])
+    if prediction[0] == 1:
+        print("keysmash")
+    else:
+        print("message")
