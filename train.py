@@ -4,10 +4,10 @@ from sklearn.neural_network import MLPClassifier
 from sklearn.metrics import accuracy_score, precision_score, recall_score, roc_auc_score, roc_curve
 import matplotlib.pyplot as plt
 from sklearn.feature_extraction.text import CountVectorizer
+from joblib import parallel_backend
 from concurrent.futures import ThreadPoolExecutor
 import pickle
 import time
-save_interval = 1000
 
 # Load the valid words from a txt file
 with open('words.txt', 'r',  encoding="utf-8") as f:
@@ -67,20 +67,15 @@ except FileNotFoundError:
     print("Starting new model.")
 
 # Train the model
-iterations = 0
-while iterations < 10000:
-    start_time = time.perf_counter()
-    with ThreadPoolExecutor() as executor:
-        executor.map(clf.fit, X_train, y_train)
-    end_time = time.perf_counter()
-    tot_time = end_time - start_time
-    iterations += 1
-    print(iterations)
-    print(tot_time)
-    if iterations % save_interval == 0:
-        with open(model_filename, 'wb') as f:
-            pickle.dump(clf, f)
-        print("Saved model state at iteration", iterations)
+start_time = time.perf_counter()
+with parallel_backend('multiprocessing'):
+    clf.fit(X_train, y_train)
+end_time = time.perf_counter()
+tot_time = end_time - start_time
+print(tot_time)
+with open(model_filename, 'wb') as f:
+    pickle.dump(clf, f)
+print("Saved model state ")
 
 y_pred = clf.predict(X_test)
 
